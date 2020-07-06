@@ -53,6 +53,7 @@ if [ $mode = 'single' ] || [ $mode = 'increment' ]; then
     declare -a packages=( $package )
 else # 'all' or 'resume'
   declare -a packages=(
+		packages/Alignment
     packages/global_consts
     packages/jobopts_svc
     packages/db_svc

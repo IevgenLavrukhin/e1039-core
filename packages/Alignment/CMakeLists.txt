@@ -2,13 +2,6 @@
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 project(Alignment CXX C)
 
-# compile MIlipedeII package:
-add_custom_command(
-	OUTPUT mpdef.o mpdalc.o mpmod.o mpbits.o mpqldec.o mptest1.o mptest2.o mille.o mpnum.o mptext.o mphistab.o minresDataModule.o minresModule.o minresqlpDataModule.o minresqlpBlasModule.o minresqlpModule.o randoms.o vertpr.o linesrch.o Dbandmatrix.o pede.o readc.o
-  COMMAND make run
-  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/MilipedeII
-)
-
 
 # ROOT dict generation
 file(GLOB dicts "")
@@ -44,6 +37,17 @@ target_link_libraries(Alignment -lgeom_svc -linterface_main -lfun4all -lphool)
 
 message(${CMAKE_PROJECT_NAME} " will be installed to " ${CMAKE_INSTALL_PREFIX})
 
+# compile MIlipedeII package:
+message("Compiling MillipedeII package to generated object file")
+add_custom_command(
+  OUTPUT mpdef.o mpdalc.o mpmod.o mpbits.o mpqldec.o mptest1.o mptest2.o mille.o mpnum.o mptext.o mphistab.o minresDataModule.o minresModule.o minresqlpDataModule.o minresqlpBlasModule.o minresqlpModule.o randoms.o vertpr.o linesrch.o Dbandmatrix.o pede.o readc.o
+  COMMAND make run
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/MilipedeII
+  COMMENT "Compiling MilipedeII package"
+)
+
+
+#install targets:
 install(TARGETS Alignment DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
 
 file(GLOB dist_headers ${PROJECT_SOURCE_DIR}/*.h)
